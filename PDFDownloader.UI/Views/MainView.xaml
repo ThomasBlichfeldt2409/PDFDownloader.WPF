@@ -5,9 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFDownloader.UI"
         xmlns:vm="clr-namespace:PDFDownloader.UI.ViewModels"
+        xmlns:views="clr-namespace:PDFDownloader.UI.Views"
         mc:Ignorable="d"
-        Title="PDF Downloader" Height="450" Width="800">
+        Title="PDF Downloader" Height="450" Width="800"
+        Background="{StaticResource Brush.Background}">
+    
     <Grid>
-
+        
+        <!-- Application Layout -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <!-- Header View -->
+        <views:HeaderView Grid.Row="0">
+            
+        </views:HeaderView>
+        
     </Grid>
+    
 </Window>
