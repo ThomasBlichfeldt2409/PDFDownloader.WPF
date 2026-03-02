@@ -8,4 +8,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PDFDownloader.Core\PDFDownloader.Core.csproj" />
+  </ItemGroup>
+
 </Project>
