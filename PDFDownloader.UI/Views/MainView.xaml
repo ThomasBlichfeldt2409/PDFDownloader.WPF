@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:PDFDownloader.UI.ViewModels"
         xmlns:views="clr-namespace:PDFDownloader.UI.Views"
         mc:Ignorable="d"
-        Title="PDF Downloader" Height="450" Width="800"
+        Title="PDF Downloader" Height="650" Width="820"
         Background="{StaticResource Brush.Background}">
     
     <Grid>
@@ -15,11 +15,14 @@
         <!-- Application Layout -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         
         <!-- Header View -->
-        <views:HeaderView Grid.Row="0">
-            
+        <views:HeaderView Grid.Row="0"
+                          DataContext="{Binding HeaderViewModel}">
         </views:HeaderView>
         
     </Grid>

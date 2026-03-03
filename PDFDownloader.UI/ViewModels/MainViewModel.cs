@@ -1,11 +1,12 @@
 ﻿using PDFDownloader.Core.Interfaces;
+using PDFDownloader.Core.Models;
 
 namespace PDFDownloader.UI.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
         // View Models
-        HeaderViewModel HeaderViewModel { get; }
+        public HeaderViewModel HeaderViewModel { get; }
 
         // Application Service
         private readonly IReportDownloadService _reportDownloadService;

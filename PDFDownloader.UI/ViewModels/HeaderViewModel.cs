@@ -1,4 +1,6 @@
-﻿namespace PDFDownloader.UI.ViewModels
+﻿using PDFDownloader.Core.Models;
+
+namespace PDFDownloader.UI.ViewModels
 {
     public class HeaderViewModel : BaseViewModel
     {

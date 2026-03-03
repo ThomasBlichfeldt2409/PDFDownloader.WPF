@@ -4,6 +4,62 @@
 
     <Border Style="{StaticResource SectionBorderStyle}">
         
+        <Grid>
+            <!-- Header Layout -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <!-- Title -->
+            <TextBlock Grid.Column="0"
+                       Grid.Row="0"
+                       Text="PDF Downloader"
+                       Foreground="{StaticResource Brush.TextPrimary}"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+            
+            <!-- Application Text -->
+            <TextBlock Grid.Column="0"
+                       Grid.Row="1"
+                       Text="Reading from Excel file → Writing result to JSON file"
+                       Foreground="{StaticResource Brush.TextSecondary}"
+                       FontSize="12"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+            
+            <!-- Application State -->
+            <TextBlock Grid.Column="1"
+                       Grid.Row="1"
+                       Text="Application State:"
+                       Foreground="{StaticResource Brush.TextPrimary}"
+                       FontSize="14"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Right">
+            </TextBlock>
+            
+            <!-- Dynamic State Text -->
+            <TextBlock Grid.Column="2"
+                       Grid.Row="1"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left"
+                       Margin="5,0,0,0"
+                       Text="{Binding State}"
+                       Style="{StaticResource StateTextStyle}">
+            </TextBlock>
+
+        </Grid>
     </Border>
     
 </UserControl>

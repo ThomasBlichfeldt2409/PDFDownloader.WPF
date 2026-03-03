@@ -10,5 +10,22 @@
         <Setter Property="Margin" Value="10"></Setter>
         <Setter Property="Padding" Value="10"></Setter>
     </Style>
+    
+    <!-- Downloading State TextBlock Style -->
+    <Style x:Key="StateTextStyle" TargetType="TextBlock">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding State}" Value="Ready">
+                <Setter Property="Foreground" Value="{StaticResource Brush.Accent}"></Setter>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding State}" Value="Downloading">
+                <Setter Property="Foreground" Value="{StaticResource Brush.Warning}"></Setter>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding State}" Value="Finished">
+                <Setter Property="Foreground" Value="{StaticResource Brush.Success}"></Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>

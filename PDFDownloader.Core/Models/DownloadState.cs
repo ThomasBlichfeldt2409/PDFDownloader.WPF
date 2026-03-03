@@ -1,4 +1,4 @@
-﻿namespace PDFDownloader.UI.ViewModels
+﻿namespace PDFDownloader.Core.Models
 {
     public enum DownloadState
     {

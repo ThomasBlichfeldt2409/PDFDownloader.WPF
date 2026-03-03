@@ -7,7 +7,7 @@
     <Color x:Key="Color.Success">#27AE60</Color>
     <Color x:Key="Color.Warning">#F39C12</Color>
 
-    <Color x:Key="Color.Background">#F4F6F8</Color>
+    <Color x:Key="Color.Background">#F1F5F9</Color>
     <Color x:Key="Color.Surface">#FFFFFF</Color>
 
     <Color x:Key="Color.TextPrimary">#1F2933</Color>
