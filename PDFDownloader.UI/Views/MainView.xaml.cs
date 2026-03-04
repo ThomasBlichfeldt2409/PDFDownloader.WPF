@@ -2,6 +2,7 @@
 using PDFDownloader.UI.ViewModels;
 using PDFDownloader.Core.Services;
 using PDFDownloader.Core.Interfaces;
+using PDFDownloader.Infrastructure.Excel;
 
 namespace PDFDownloader.UI.Views
 {
@@ -11,7 +12,13 @@ namespace PDFDownloader.UI.Views
         {
             InitializeComponent();
 
-            IReportDownloadService reportDownloadService = new ReportDownloadService();
+            // Initializing infrastructure
+            IMetadataReader metadataReader = new ExcelMetadataReader();
+
+            // Creating Service
+            IReportDownloadService reportDownloadService = new ReportDownloadService(metadataReader);
+
+            // Setting MainViews view model
             DataContext = new MainViewModel(reportDownloadService);
         }
     }

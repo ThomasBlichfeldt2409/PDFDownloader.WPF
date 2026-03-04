@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PDFDownloader.Core\PDFDownloader.Core.csproj" />
+    <ProjectReference Include="..\PDFDownloader.Infrastructure\PDFDownloader.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
