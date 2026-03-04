@@ -45,6 +45,15 @@
                      Focusable="False"
                      Cursor="Arrow">
             </TextBox>
+            
+            <!-- Excel Browse Button -->
+            <Button Grid.Row="0"
+                    Grid.Column="3"
+                    Content="Browse"
+                    Background="{StaticResource Brush.Accent}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            </Button>
         
             <!-- Download Button -->
             <Button Grid.Row="5"
