@@ -3,11 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Border Style="{StaticResource SectionBorderStyle}">
+
+        <Grid>
+            <!-- Configs Layout -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
         
         <!-- Download Button -->
-        <Button Content="Download"
+        <Button Grid.Row="5"
+                Grid.Column="3"
+                Content="Download"
+                Background="{StaticResource Brush.Accent}"
                 Command="{Binding StartDownloadCommand}">
         </Button>
-        
+
+        </Grid>
+
     </Border>
 </UserControl>
