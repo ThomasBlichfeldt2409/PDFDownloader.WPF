@@ -23,6 +23,7 @@ namespace PDFDownloader.UI.ViewModels
                 if (SetProperty(ref _state, value))
                 {
                     HeaderViewModel.State = value;
+                    ConfigsViewModel.State = value;
                 }
             }
         }

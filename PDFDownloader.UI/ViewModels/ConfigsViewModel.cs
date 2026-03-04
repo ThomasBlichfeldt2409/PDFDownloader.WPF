@@ -1,4 +1,5 @@
-﻿using PDFDownloader.UI.Commands;
+﻿using PDFDownloader.Core.Models;
+using PDFDownloader.UI.Commands;
 using System.Windows.Input;
 namespace PDFDownloader.UI.ViewModels
 {
@@ -7,19 +8,42 @@ namespace PDFDownloader.UI.ViewModels
         private readonly Func<Task> _startDownload;
         public ICommand StartDownloadCommand { get; }
 
+        private DownloadState _state;
+        public DownloadState State
+        {
+            get => _state;
+            set
+            {
+                if (SetProperty(ref _state, value))
+                {
+                    // Re-evaluate so button disables
+                    (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
         public ConfigsViewModel(Func<Task> startDownloading)
         {
             _startDownload = startDownloading;
 
             // Commands
             StartDownloadCommand = new RelayCommand(
-               async _ => await StartDownload()
+               async _ => await StartDownload(),
+               _ => CanStartDownload()
             );
         }
 
         public async Task StartDownload()
         {
             await _startDownload();
+        }
+
+        private bool CanStartDownload()
+        {
+            if (State != DownloadState.Ready)
+                return false;
+
+            return true;
         }
     }
 }
