@@ -126,7 +126,7 @@
                        HorizontalAlignment="Left">
             </TextBlock>
 
-            <!-- Starting Row TextBox -->
+            <!-- BR Nummer TextBox -->
             <TextBox Grid.Row="3"
                      Grid.Column="1"
                      FontSize="12"
@@ -136,6 +136,50 @@
                      HorizontalAlignment="Stretch"
                      ToolTip="Enter column for the BR Nummer"
                      Text="{Binding BrNummer, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <!-- Primary Url TextBlock -->
+            <TextBlock Grid.Row="4"
+                       Grid.Column="0"
+                       Text="Primary URL:"
+                       FontSize="12"
+                       Foreground="{StaticResource Brush.TextPrimary}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+
+            <!-- Primary Url TextBox -->
+            <TextBox Grid.Row="4"
+                     Grid.Column="1"
+                     FontSize="12"
+                     BorderThickness="1"
+                     BorderBrush="{StaticResource Brush.TextPrimary}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     ToolTip="Enter column for the primary URL"
+                     Text="{Binding PrimaryUrl, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <!-- Primary Url TextBlock -->
+            <TextBlock Grid.Row="5"
+                       Grid.Column="0"
+                       Text="Secondary URL:"
+                       FontSize="12"
+                       Foreground="{StaticResource Brush.TextPrimary}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+
+            <!-- Primary Url TextBox -->
+            <TextBox Grid.Row="5"
+                     Grid.Column="1"
+                     FontSize="12"
+                     BorderThickness="1"
+                     BorderBrush="{StaticResource Brush.TextPrimary}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     ToolTip="Enter column for the secondary URL"
+                     Text="{Binding SecondaryUrl, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
 
             <!-- Download Button -->

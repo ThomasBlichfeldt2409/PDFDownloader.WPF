@@ -102,7 +102,55 @@ namespace PDFDownloader.UI.ViewModels
             {
                 if (SetProperty(ref _brNummer, value))
                 {
-                    IsBrNummerValid = ValidateColumn();
+                    IsBrNummerValid = ValidateColumn(BrNummer);
+
+                    // Re-evaluate buttons
+                    (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        // Primary URL
+        private bool _isPrimaryUrlValid;
+        public bool IsPrimaryUrlValid
+        {
+            get => _isPrimaryUrlValid;
+            set => SetProperty(ref _isPrimaryUrlValid, value);
+        }
+
+        private string _primaryUrl = string.Empty;
+        public string PrimaryUrl
+        {
+            get => _primaryUrl;
+            set
+            {
+                if (SetProperty(ref _primaryUrl, value))
+                {
+                    IsPrimaryUrlValid = ValidateColumn(PrimaryUrl);
+
+                    // Re-evaluate buttons
+                    (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        // Secondary URL
+        private bool _isSecondaryUrlValid;
+        public bool IsSecondaryUrlValid
+        {
+            get => _isSecondaryUrlValid;
+            set => SetProperty(ref _isSecondaryUrlValid, value);
+        }
+
+        private string _secondaryUrl = string.Empty;
+        public string SecondaryUrl
+        {
+            get => _secondaryUrl;
+            set
+            {
+                if (SetProperty(ref _secondaryUrl, value))
+                {
+                    IsSecondaryUrlValid = ValidateColumn(SecondaryUrl);
 
                     // Re-evaluate buttons
                     (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
@@ -171,7 +219,9 @@ namespace PDFDownloader.UI.ViewModels
                 && !string.IsNullOrEmpty(ExcelFilePath)
                 && !string.IsNullOrEmpty(OutputFolderPath)
                 && IsStartingRowValid
-                && IsBrNummerValid;
+                && IsBrNummerValid
+                && IsPrimaryUrlValid
+                && IsSecondaryUrlValid;
         }
 
         private bool CanBrowseExcel()
@@ -203,9 +253,9 @@ namespace PDFDownloader.UI.ViewModels
             }
         }
 
-        private bool ValidateColumn()
+        private bool ValidateColumn(string column)
         {
-            if (!string.IsNullOrWhiteSpace(BrNummer) && BrNummer.All(char.IsLetter))
+            if (!string.IsNullOrWhiteSpace(column) && column.All(char.IsLetter))
             {
                 return true;
             }
