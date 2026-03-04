@@ -1,7 +1,8 @@
 ﻿using Microsoft.Win32;
+using System.Windows.Input;
 using PDFDownloader.Core.Models;
 using PDFDownloader.UI.Commands;
-using System.Windows.Input;
+
 namespace PDFDownloader.UI.ViewModels
 {
     public class ConfigsViewModel : BaseViewModel
@@ -9,6 +10,7 @@ namespace PDFDownloader.UI.ViewModels
         private readonly Func<Task> _startDownload;
         public ICommand StartDownloadCommand { get; }
         public ICommand BrowseExcelCommand { get; }
+        public ICommand BrowseFolderCommand { get; }
 
         private DownloadState _state;
         public DownloadState State
@@ -21,6 +23,7 @@ namespace PDFDownloader.UI.ViewModels
                     // Re-evaluate buttons
                     (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
                     (BrowseExcelCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                    (BrowseFolderCommand as RelayCommand)?.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -32,6 +35,20 @@ namespace PDFDownloader.UI.ViewModels
             set
             {
                 if (SetProperty(ref _excelFilePath, value))
+                {
+                    // Re-evaluate buttons
+                    (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        private string _outputFolderPath = string.Empty;
+        public string OutputFolderPath
+        {
+            get => _outputFolderPath;
+            set
+            {
+                if (SetProperty(ref _outputFolderPath, value))
                 {
                     // Re-evaluate buttons
                     (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
@@ -52,6 +69,11 @@ namespace PDFDownloader.UI.ViewModels
             BrowseExcelCommand = new RelayCommand(
                 _ => BrowseExcel(),
                 _ => CanBrowseExcel()
+            );
+
+            BrowseFolderCommand = new RelayCommand(
+                _ => BrowseFolder(),
+                _ => CanBrowseFolder()
             );
         }
 
@@ -77,15 +99,35 @@ namespace PDFDownloader.UI.ViewModels
             }
         }
 
+        private void BrowseFolder()
+        {
+            OpenFolderDialog dialog = new OpenFolderDialog();
+
+            bool? result = dialog.ShowDialog();
+
+            if ( result == true )
+            {
+                OutputFolderPath = dialog.FolderName;
+            }
+        }
+
         private bool CanStartDownload()
         {
-            if (State != DownloadState.Ready | ExcelFilePath == string.Empty)
+            if (State != DownloadState.Ready | ExcelFilePath == string.Empty | OutputFolderPath == string.Empty)
                 return false;
 
             return true;
         }
 
         private bool CanBrowseExcel()
+        {
+            if (State != DownloadState.Ready)
+                return false;
+
+            return true;
+        }
+
+        private bool CanBrowseFolder()
         {
             if (State != DownloadState.Ready)
                 return false;
