@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PDFDownloader.Core\PDFDownloader.Core.csproj" />
     <ProjectReference Include="..\PDFDownloader.Infrastructure\PDFDownloader.Infrastructure.csproj" />
   </ItemGroup>

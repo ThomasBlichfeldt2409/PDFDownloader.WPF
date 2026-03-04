@@ -25,6 +25,11 @@
                           DataContext="{Binding HeaderViewModel}">
         </views:HeaderView>
         
+        <!-- Configs View -->
+        <views:ConfigsView Grid.Row="1"
+                           DataContext="{Binding ConfigsViewModel}">
+        </views:ConfigsView>
+        
     </Grid>
     
 </Window>

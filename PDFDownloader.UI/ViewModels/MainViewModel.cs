@@ -7,6 +7,7 @@ namespace PDFDownloader.UI.ViewModels
     {
         // View Models
         public HeaderViewModel HeaderViewModel { get; }
+        public ConfigsViewModel ConfigsViewModel { get; }
 
         // Application Service
         private readonly IReportDownloadService _reportDownloadService;
@@ -27,7 +28,9 @@ namespace PDFDownloader.UI.ViewModels
         
         public MainViewModel(IReportDownloadService reportDownloadService)
         {
+            // Creating View Models 
             HeaderViewModel = new HeaderViewModel();
+            ConfigsViewModel = new ConfigsViewModel();
 
             _reportDownloadService = reportDownloadService;
 
