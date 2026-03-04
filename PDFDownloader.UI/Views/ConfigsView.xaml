@@ -35,6 +35,7 @@
             <TextBox Grid.Row="0"
                      Grid.Column="1"
                      Grid.ColumnSpan="2"
+                     Text="{Binding ExcelFilePath}"
                      FontSize="12"
                      Foreground="{StaticResource Brush.TextPrimary}"
                      BorderThickness="1"
@@ -52,7 +53,8 @@
                     Content="Browse"
                     Background="{StaticResource Brush.Accent}"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Command="{Binding BrowseExcelCommand}">
             </Button>
         
             <!-- Download Button -->
