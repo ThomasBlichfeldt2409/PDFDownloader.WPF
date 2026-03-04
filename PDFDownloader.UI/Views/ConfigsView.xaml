@@ -20,14 +20,27 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+            
+            <!-- Excel TextBlock -->
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Excel File:"
+                       FontSize="12"
+                       Foreground="{StaticResource Brush.TextPrimary}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+                
+            </TextBlock>
         
-        <!-- Download Button -->
-        <Button Grid.Row="5"
-                Grid.Column="3"
-                Content="Download"
-                Background="{StaticResource Brush.Accent}"
-                Command="{Binding StartDownloadCommand}">
-        </Button>
+            <!-- Download Button -->
+            <Button Grid.Row="5"
+                    Grid.Column="3"
+                    Content="Download"
+                    Background="{StaticResource Brush.Accent}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Command="{Binding StartDownloadCommand}">
+            </Button>
 
         </Grid>
 
