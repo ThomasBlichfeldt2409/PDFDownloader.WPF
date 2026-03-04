@@ -158,6 +158,15 @@ namespace PDFDownloader.UI.ViewModels
             }
         }
 
+        // Max Concurrency
+        private int _maxConcurrency = 15;
+        public int MaxConcurrency
+        {
+            get => _maxConcurrency;
+            set => SetProperty(ref _maxConcurrency, value);
+
+        }
+
         public ConfigsViewModel(Func<Task> startDownloading)
         {
             _startDownload = startDownloading;

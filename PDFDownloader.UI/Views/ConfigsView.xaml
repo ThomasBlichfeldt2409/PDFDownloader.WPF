@@ -9,8 +9,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="10*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="8*"></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -53,6 +53,7 @@
                     Grid.Column="4"
                     Content="Browse"
                     Background="{StaticResource Brush.Accent}"
+                    Foreground="{StaticResource Brush.Surface}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Command="{Binding BrowseExcelCommand}">
@@ -89,6 +90,7 @@
                     Grid.Column="4"
                     Content="Browse"
                     Background="{StaticResource Brush.Accent}"
+                    Foreground="{StaticResource Brush.Surface}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Command="{Binding BrowseFolderCommand}">
@@ -181,12 +183,35 @@
                      ToolTip="Enter column for the secondary URL"
                      Text="{Binding SecondaryUrl, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
+            
+            <!-- Max Concurrency TextBlock -->
+            <TextBlock Grid.Row="2"
+                       Grid.Column="3"
+                       Text="{Binding MaxConcurrency, StringFormat=Max Concurrency: {0}}"
+                       FontSize="12"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource Brush.TextPrimary}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center">
+            </TextBlock>
+            
+            <!-- Max Concurrency Slider -->
+            <Slider Grid.Row="3"
+                    Grid.Column="3"
+                    Minimum="1"
+                    Maximum="30"
+                    TickFrequency="1"
+                    IsSnapToTickEnabled="True"
+                    VerticalAlignment="Center"
+                    Value="{Binding MaxConcurrency, UpdateSourceTrigger=PropertyChanged}">
+            </Slider>
 
             <!-- Download Button -->
             <Button Grid.Row="5"
                     Grid.Column="4"
                     Content="Download"
                     Background="{StaticResource Brush.Accent}"
+                    Foreground="{StaticResource Brush.Surface}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Command="{Binding StartDownloadCommand}">
