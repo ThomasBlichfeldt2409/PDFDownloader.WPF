@@ -49,11 +49,23 @@ namespace PDFDownloader.UI.ViewModels
 
         private IReportDownloadService InitializeInfrastructure()
         {
-            IMetadataReader metadataReader = new ExcelMetadataReader();
-            IReportDownloader reportDownloader = new HttpReportDownloader();
-            IResultWriter resultWriter = new JsonResultWriter();
+            IMetadataReader metadataReader = new ExcelMetadataReader(
+                ConfigsViewModel.ExcelFilePath,
+                ConfigsViewModel.StartingRow,
+                ConfigsViewModel.BrNummer,
+                ConfigsViewModel.PrimaryUrl,
+                ConfigsViewModel.SecondaryUrl);
 
-            return new ReportDownloadService(metadataReader, reportDownloader, resultWriter);
+            IReportDownloader reportDownloader = new HttpReportDownloader();
+
+            IResultWriter resultWriter = new JsonResultWriter(ConfigsViewModel.OutputFolderPath);
+
+            return new ReportDownloadService(
+                metadataReader, 
+                reportDownloader, 
+                resultWriter,
+                ConfigsViewModel.OutputFolderPath,
+                ConfigsViewModel.MaxConcurrency);
         }
     }
 }

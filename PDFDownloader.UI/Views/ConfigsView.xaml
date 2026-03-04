@@ -192,7 +192,7 @@
                        FontWeight="Bold"
                        Foreground="{StaticResource Brush.TextPrimary}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Center">
+                       HorizontalAlignment="Left">
             </TextBlock>
             
             <!-- Max Concurrency Slider -->
