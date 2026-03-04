@@ -5,8 +5,8 @@
     <Border Style="{StaticResource SectionBorderStyle}">
         
         <!-- Download Button -->
-        <Button Content="Download">
-            
+        <Button Content="Download"
+                Command="{Binding StartDownloadCommand}">
         </Button>
         
     </Border>

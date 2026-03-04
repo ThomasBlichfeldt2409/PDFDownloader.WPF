@@ -25,14 +25,23 @@ namespace PDFDownloader.UI.ViewModels
                 }
             }
         }
+
+        private async Task StartDownloadAsync()
+        {
+            State = DownloadState.Downloading;
+
+            await _reportDownloadService.ExecuteAsync();
+
+            State = DownloadState.Finished;
+        }
         
         public MainViewModel(IReportDownloadService reportDownloadService)
         {
+            _reportDownloadService = reportDownloadService;
+
             // Creating View Models 
             HeaderViewModel = new HeaderViewModel();
-            ConfigsViewModel = new ConfigsViewModel();
-
-            _reportDownloadService = reportDownloadService;
+            ConfigsViewModel = new ConfigsViewModel(StartDownloadAsync);
 
             State = DownloadState.Ready;
         }
