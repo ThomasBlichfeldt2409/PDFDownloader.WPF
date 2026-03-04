@@ -92,6 +92,50 @@
                     HorizontalAlignment="Center"
                     Command="{Binding BrowseFolderCommand}">
             </Button>
+            
+            <!-- Starting Row TextBlock -->
+            <TextBlock Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Starting Row:"
+                       FontSize="12"
+                       Foreground="{StaticResource Brush.TextPrimary}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+            
+            <!-- Starting Row TextBox -->
+            <TextBox Grid.Row="2"
+                     Grid.Column="1"
+                     FontSize="12"
+                     BorderThickness="1"
+                     BorderBrush="{StaticResource Brush.TextPrimary}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     ToolTip="Enter the starting row of the data in the Excel file"
+                     Text="{Binding StartingRowStr, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+            
+            <!-- BR Nummer TextBlock -->
+            <TextBlock Grid.Row="3"
+                       Grid.Column="0"
+                       Text="BR Nummer:"
+                       FontSize="12"
+                       Foreground="{StaticResource Brush.TextPrimary}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+            </TextBlock>
+
+            <!-- Starting Row TextBox -->
+            <TextBox Grid.Row="3"
+                     Grid.Column="1"
+                     FontSize="12"
+                     BorderThickness="1"
+                     BorderBrush="{StaticResource Brush.TextPrimary}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     ToolTip="Enter column for the BR Nummer"
+                     Text="{Binding BrNummer, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
 
             <!-- Download Button -->
             <Button Grid.Row="5"

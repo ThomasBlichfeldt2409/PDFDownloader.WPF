@@ -13,7 +13,7 @@
                 <ResourceDictionary Source="Styles/Brushes.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Styles/Styles.xaml"></ResourceDictionary>
 
-                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Indigo" SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
 
             </ResourceDictionary.MergedDictionaries>

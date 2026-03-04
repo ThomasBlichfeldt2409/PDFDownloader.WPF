@@ -8,6 +8,7 @@ namespace PDFDownloader.UI.ViewModels
     public class ConfigsViewModel : BaseViewModel
     {
         private readonly Func<Task> _startDownload;
+
         public ICommand StartDownloadCommand { get; }
         public ICommand BrowseExcelCommand { get; }
         public ICommand BrowseFolderCommand { get; }
@@ -28,6 +29,7 @@ namespace PDFDownloader.UI.ViewModels
             }
         }
 
+        // Excel Path
         private string _excelFilePath = string.Empty;
         public string ExcelFilePath
         {
@@ -42,6 +44,7 @@ namespace PDFDownloader.UI.ViewModels
             }
         }
 
+        // Output Folder Path
         private string _outputFolderPath = string.Empty;
         public string OutputFolderPath
         {
@@ -50,6 +53,57 @@ namespace PDFDownloader.UI.ViewModels
             {
                 if (SetProperty(ref _outputFolderPath, value))
                 {
+                    // Re-evaluate buttons
+                    (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        // Starting Row 
+        private int _startingRow;
+        public int StartingRow => _startingRow;
+
+        private bool _isStartingRowValid;
+        public bool IsStartingRowValid
+        {
+            get => _isStartingRowValid;
+            set => SetProperty(ref _isStartingRowValid, value);
+        }
+
+        private string _startingRowStr = string.Empty;
+        public string StartingRowStr
+        {
+            get => _startingRowStr;
+            set
+            {
+                if (SetProperty(ref _startingRowStr, value))
+                {
+                    ValidateStartingRow();
+
+                    // Re-evaluate buttons
+                    (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        // BR Nummer
+        private bool _isBrNummerValid;
+        public bool IsBrNummerValid
+        {
+            get => _isBrNummerValid;
+            set => SetProperty(ref _isBrNummerValid, value);
+        }
+
+        private string _brNummer = string.Empty;
+        public string BrNummer
+        {
+            get => _brNummer;
+            set
+            {
+                if (SetProperty(ref _brNummer, value))
+                {
+                    IsBrNummerValid = ValidateColumn();
+
                     // Re-evaluate buttons
                     (StartDownloadCommand as RelayCommand)?.RaiseCanExecuteChanged();
                 }
@@ -113,10 +167,11 @@ namespace PDFDownloader.UI.ViewModels
 
         private bool CanStartDownload()
         {
-            if (State != DownloadState.Ready | ExcelFilePath == string.Empty | OutputFolderPath == string.Empty)
-                return false;
-
-            return true;
+            return State == DownloadState.Ready
+                && !string.IsNullOrEmpty(ExcelFilePath)
+                && !string.IsNullOrEmpty(OutputFolderPath)
+                && IsStartingRowValid
+                && IsBrNummerValid;
         }
 
         private bool CanBrowseExcel()
@@ -133,6 +188,31 @@ namespace PDFDownloader.UI.ViewModels
                 return false;
 
             return true;
+        }
+
+        private void ValidateStartingRow()
+        {
+            if (int.TryParse(StartingRowStr, out int newRow) && newRow >= 1)
+            {
+                _startingRow = newRow;
+                IsStartingRowValid = true;
+            }
+            else
+            {
+                IsStartingRowValid = false;
+            }
+        }
+
+        private bool ValidateColumn()
+        {
+            if (!string.IsNullOrWhiteSpace(BrNummer) && BrNummer.All(char.IsLetter))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
