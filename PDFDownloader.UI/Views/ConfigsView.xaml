@@ -29,8 +29,22 @@
                        Foreground="{StaticResource Brush.TextPrimary}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left">
-                
             </TextBlock>
+            
+            <!-- Excel TextBox -->
+            <TextBox Grid.Row="0"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     FontSize="12"
+                     Foreground="{StaticResource Brush.TextPrimary}"
+                     BorderThickness="1"
+                     BorderBrush="{StaticResource Brush.TextPrimary}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     IsReadOnly="True"
+                     Focusable="False"
+                     Cursor="Arrow">
+            </TextBox>
         
             <!-- Download Button -->
             <Button Grid.Row="5"
