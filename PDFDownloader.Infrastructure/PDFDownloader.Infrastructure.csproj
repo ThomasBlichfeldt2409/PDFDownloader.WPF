@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Download\" />
-    <Folder Include="Storage\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PDFDownloader.Core\PDFDownloader.Core.csproj" />
   </ItemGroup>
 
