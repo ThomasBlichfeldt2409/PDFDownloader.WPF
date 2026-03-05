@@ -45,44 +45,8 @@ namespace PDFDownloader.Core.Services
                 await semaphore.WaitAsync();
 
                 // create task
-                Task task = Task.Run(async () =>
-                {
-                    try
-                    {
-                        bool isDownloaded = false;
-
-                        string filePath = Path.Combine(_outputFolderPath, $"{report.BRNummer}.pdf");
-
-                        // Try Primary URL
-                        if (!string.IsNullOrWhiteSpace(report.PrimaryUrl))
-                        {
-                            isDownloaded = await _reportDownloader.DownloadAsync(report.PrimaryUrl, filePath);
-                        }
-
-                        // If Primary URL failed, try Secondary URL
-                        if (!string.IsNullOrWhiteSpace(report.SecondaryUrl) && !isDownloaded)
-                        {
-                            isDownloaded = await _reportDownloader.DownloadAsync(report.SecondaryUrl, filePath);
-                        }
-
-                        // Add result - lock ensures only one thread may enter this block at a time
-                        lock (_resultsLock)
-                        {
-                            results.Add(new DownloadResult
-                            {
-                                BRNummer = report.BRNummer,
-                                IsDownloaded = isDownloaded
-                            });
-                        }
-
-                    }
-                    finally
-                    {
-                        // Release task to make room for new one
-                        semaphore.Release();
-                    }
-                });
-
+                Task task = DownloadReportAsync(report, semaphore, results);
+                
                 tasks.Add(task);
             }
 
@@ -91,6 +55,43 @@ namespace PDFDownloader.Core.Services
 
             // Create JSON file with results
             await _resultWriter.WriteAsync(results);
+        }
+
+        private async Task DownloadReportAsync(ReportMetadata report, SemaphoreSlim semaphore, List<DownloadResult> results)
+        {
+            try
+            {
+                bool isDownloaded = false;
+
+                string filePath = Path.Combine(_outputFolderPath, $"{report.BRNummer}.pdf");
+
+                // Try Primary URL
+                if (!string.IsNullOrWhiteSpace(report.PrimaryUrl))
+                {
+                    isDownloaded = await _reportDownloader.DownloadAsync(report.PrimaryUrl, filePath);
+                }
+
+                // If Primary URL failed, try Secondary URL
+                if (!string.IsNullOrWhiteSpace(report.SecondaryUrl) && !isDownloaded)
+                {
+                    isDownloaded = await _reportDownloader.DownloadAsync(report.SecondaryUrl, filePath);
+                }
+
+                // Add result - lock ensures only one thread may enter this block at a time
+                lock (_resultsLock)
+                {
+                    results.Add(new DownloadResult
+                    {
+                        BRNummer = report.BRNummer,
+                        IsDownloaded = isDownloaded
+                    });
+                }
+            }
+            finally
+            {
+                // Release task to make room for new one
+                semaphore.Release();
+            }
         }
     }
 }
