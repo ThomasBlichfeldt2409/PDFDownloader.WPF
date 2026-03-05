@@ -27,10 +27,16 @@ namespace PDFDownloader.Core.Services
             _maxConcurrency = maxConcurrency;
         }
 
-        public async Task ExecuteAsync()
+        public async Task ExecuteAsync(IProgress<DownloadProgress>? progress = null)
         {
             // Read URL's from the data
             List<ReportMetadata> reports = await _metadataReader.ReadAsync();
+
+            progress?.Report(new DownloadProgress
+            {
+                Total = reports.Count
+            });
+
             List<DownloadResult> results = new List<DownloadResult>();
 
             // Concurrency Controller - max of _maxConcurrency at a time
@@ -45,7 +51,7 @@ namespace PDFDownloader.Core.Services
                 await semaphore.WaitAsync();
 
                 // create task
-                Task task = DownloadReportAsync(report, semaphore, results);
+                Task task = DownloadReportAsync(report, semaphore, results, progress);
                 
                 tasks.Add(task);
             }
@@ -57,7 +63,11 @@ namespace PDFDownloader.Core.Services
             await _resultWriter.WriteAsync(results);
         }
 
-        private async Task DownloadReportAsync(ReportMetadata report, SemaphoreSlim semaphore, List<DownloadResult> results)
+        private async Task DownloadReportAsync(
+            ReportMetadata report, 
+            SemaphoreSlim semaphore, 
+            List<DownloadResult> results, 
+            IProgress<DownloadProgress>? progress)
         {
             try
             {
@@ -77,15 +87,22 @@ namespace PDFDownloader.Core.Services
                     isDownloaded = await _reportDownloader.DownloadAsync(report.SecondaryUrl, filePath);
                 }
 
-                // Add result - lock ensures only one thread may enter this block at a time
+                // Create result
+                DownloadResult result = new DownloadResult
+                {
+                    BRNummer = report.BRNummer,
+                    IsDownloaded = isDownloaded
+                };
+
                 lock (_resultsLock)
                 {
-                    results.Add(new DownloadResult
-                    {
-                        BRNummer = report.BRNummer,
-                        IsDownloaded = isDownloaded
-                    });
+                    results.Add(result);
                 }
+
+                progress?.Report(new DownloadProgress
+                {
+                    Result = result
+                });
             }
             finally
             {

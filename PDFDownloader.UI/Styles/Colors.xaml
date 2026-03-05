@@ -6,6 +6,7 @@
     <Color x:Key="Color.Accent">#3498DB</Color>
     <Color x:Key="Color.Success">#27AE60</Color>
     <Color x:Key="Color.Warning">#F39C12</Color>
+    <Color x:Key="Color.Failed">#E74C3C</Color>
 
     <Color x:Key="Color.Background">#F1F5F9</Color>
     <Color x:Key="Color.Surface">#FFFFFF</Color>

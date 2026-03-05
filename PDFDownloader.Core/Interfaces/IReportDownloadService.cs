@@ -1,7 +1,9 @@
-﻿namespace PDFDownloader.Core.Interfaces
+﻿using PDFDownloader.Core.Models;
+
+namespace PDFDownloader.Core.Interfaces
 {
     public interface IReportDownloadService
     {
-        Task ExecuteAsync();
+        Task ExecuteAsync(IProgress<DownloadProgress>? progress = null);
     }
 }

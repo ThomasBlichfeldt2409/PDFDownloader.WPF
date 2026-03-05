@@ -12,6 +12,7 @@ namespace PDFDownloader.UI.ViewModels
         // View Models
         public HeaderViewModel HeaderViewModel { get; }
         public ConfigsViewModel ConfigsViewModel { get; }
+        public ProgressViewModel ProgressViewModel { get; }
 
         // Application State
         private DownloadState _state;
@@ -33,6 +34,7 @@ namespace PDFDownloader.UI.ViewModels
             // Creating View Models 
             HeaderViewModel = new HeaderViewModel();
             ConfigsViewModel = new ConfigsViewModel(StartDownloadAsync);
+            ProgressViewModel = new ProgressViewModel();
 
             State = DownloadState.Ready;
         }
@@ -42,7 +44,22 @@ namespace PDFDownloader.UI.ViewModels
             State = DownloadState.Downloading;
 
             IReportDownloadService reportDownloadService = InitializeInfrastructure();
-            await reportDownloadService.ExecuteAsync();
+
+            Progress<DownloadProgress> progress = new Progress<DownloadProgress>(p =>
+            {
+                if (p.Total > 0)
+                {
+                    ProgressViewModel.Total = p.Total;
+                    return;
+                }
+
+                if (p.Result != null)
+                {
+                    ProgressViewModel.Report(p.Result);
+                }
+            });
+
+            await reportDownloadService.ExecuteAsync(progress);
 
             State = DownloadState.Finished;
         }
